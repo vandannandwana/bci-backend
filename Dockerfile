@@ -8,7 +8,7 @@ WORKDIR /app
 COPY target/bci-backend-0.0.1-SNAPSHOT.jar app.jar
 
 # Expose port 8080 for Spring Boot
-EXPOSE 8080
+EXPOSE 8081
 
 # Run the JAR file
 CMD ["java", "-jar", "app.jar"]
