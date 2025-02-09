@@ -31,5 +31,100 @@ public class UserDto {
     private List<MostOpenedDto> mostOpened;
     private List<SessionTimeDto> eachSessionTime;
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public int getBrainAge() {
+        return brainAge;
+    }
+
+    public void setBrainAge(int brainAge) {
+        this.brainAge = brainAge;
+    }
+
+    public List<RecordDto> getRecords() {
+        return records;
+    }
+
+    public void setRecords(List<RecordDto> records) {
+        this.records = records;
+    }
+
+    public boolean isPremiumUser() {
+        return isPremiumUser;
+    }
+
+    public void setPremiumUser(boolean premiumUser) {
+        isPremiumUser = premiumUser;
+    }
+
+    public LocalDate getPremiumExpireDate() {
+        return premiumExpireDate;
+    }
+
+    public void setPremiumExpireDate(LocalDate premiumExpireDate) {
+        this.premiumExpireDate = premiumExpireDate;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
+
+    public List<LikeDto> getLikes() {
+        return likes;
+    }
+
+    public void setLikes(List<LikeDto> likes) {
+        this.likes = likes;
+    }
+
+    public List<MostOpenedDto> getMostOpened() {
+        return mostOpened;
+    }
+
+    public void setMostOpened(List<MostOpenedDto> mostOpened) {
+        this.mostOpened = mostOpened;
+    }
+
+    public List<SessionTimeDto> getEachSessionTime() {
+        return eachSessionTime;
+    }
+
+    public void setEachSessionTime(List<SessionTimeDto> eachSessionTime) {
+        this.eachSessionTime = eachSessionTime;
+    }
 }
 

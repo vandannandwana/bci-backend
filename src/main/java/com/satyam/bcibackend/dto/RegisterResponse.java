@@ -2,6 +2,7 @@ package com.satyam.bcibackend.dto;
 
 import lombok.*;
 
+@Data
 @Getter
 @Setter
 @NoArgsConstructor
