@@ -1,29 +1,31 @@
 package com.satyam.bcibackend.dto;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import lombok.*;
-import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
 public class RecordDto {
-    private String id;
+    private String sessionId;
     private Date fullDate;
-    private int value;// Value of brain waves
+    public ArrayList<Integer> values;// Value of brain waves
 
-    public String getId() {
-        return id;
+    public RecordDto(String sessionId, Date date) {
+        this.sessionId = sessionId;
+        this.fullDate = date;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public String getSessionId() {
+        return sessionId;
+    }
+
+    public void setSessionId(String sessionId) {
+        this.sessionId = sessionId;
     }
 
     public Date getFullDate() {
@@ -34,11 +36,11 @@ public class RecordDto {
         this.fullDate = fullDate;
     }
 
-    public int getValue() {
-        return value;
+    public ArrayList<Integer> getValue() {
+        return values;
     }
 
-    public void setValue(int value) {
-        this.value = value;
+    public void setValue(ArrayList<Integer> values) {
+        this.values = values;
     }
 }

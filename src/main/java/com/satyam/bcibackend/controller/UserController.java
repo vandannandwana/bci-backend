@@ -44,6 +44,18 @@ public class UserController {
 
     }
 
+    @GetMapping("/getUserById/{id}")
+    UserDto getUserById(@PathVariable String id){
+
+        try{
+            return userService.findUserById(id);
+        }catch (Exception e){
+            System.out.println("Failed to pass your request with the error: "+e.getMessage());
+            return new UserDto();
+        }
+
+    }
+
     @PostMapping("/addUsers")
     ResponseEntity<String> addUsers(@RequestBody List<UserDto> users){
 
