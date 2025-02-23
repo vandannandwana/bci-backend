@@ -15,9 +15,12 @@ public class RecordDto {
     private Date fullDate;
     public ArrayList<Integer> values;// Value of brain waves
 
-    public RecordDto(String sessionId, Date date) {
+    public RecordDto(String sessionId, Date fullDate, ArrayList<Integer> values) {
         this.sessionId = sessionId;
-        this.fullDate = date;
+        this.fullDate = fullDate;
+        this.values = values;
+    }
+    public RecordDto() {
     }
 
     public String getSessionId() {
@@ -36,11 +39,11 @@ public class RecordDto {
         this.fullDate = fullDate;
     }
 
-    public ArrayList<Integer> getValue() {
+    public ArrayList<Integer> getValues() {
         return values;
     }
 
-    public void setValue(ArrayList<Integer> values) {
+    public void setValues(ArrayList<Integer> values) {
         this.values = values;
     }
 }
