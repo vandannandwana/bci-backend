@@ -12,4 +12,6 @@ public interface UserRepository extends MongoRepository<UserDto,String> {
     @Query("{ 'name': { $regex: ?0, $options: 'i' } }")
     List<UserDto> findByNameRegex(String name);
 
+    UserDto findUserByPhoneNumber(String phoneNumber);
+
 }

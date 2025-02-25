@@ -14,26 +14,28 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api")
+    @RequestMapping("/api")
 public class AuthController {
 
     @Autowired
     AuthService authService;
-    @Autowired
-    VonageService vs;
 
     @PostMapping("/generate-otp")
-    public ResponseEntity<Void> generateOtp(
-            @RequestBody GenerateOtpRequest generateOtpRequest) {
+    public ResponseEntity<Void> generateOtp(@RequestBody GenerateOtpRequest generateOtpRequest) {
         authService.generateOtp(generateOtpRequest.getPhoneNumber());
-        vs.sendMessage("Your OTP for CerboTech-BCI Application is : 112233");
         return ResponseEntity.ok().build();
     }
 
     @PostMapping("/verify-otp")
-    public ResponseEntity<RegisterResponse> verifyOtp(
-            @RequestBody RegisterRequest registerRequest) throws IllegalAccessException {
-        RegisterResponse register = authService.verifyOtp(registerRequest);
-        return ResponseEntity.ok(register);
+    public ResponseEntity<RegisterResponse> verifyOtp(@RequestBody RegisterRequest registerRequest) throws IllegalAccessException {
+
+        RegisterResponse response = new RegisterResponse();
+
+        if(authService.verifyOtp(registerRequest)){
+            response.setToken("Verification Successful");
+        }else {
+            response.setToken("Verification not Successful");
+        }
+        return ResponseEntity.ok(response);
     }
 }

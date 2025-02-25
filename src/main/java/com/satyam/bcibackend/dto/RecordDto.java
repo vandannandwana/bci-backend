@@ -9,7 +9,6 @@ import java.util.List;
 @Data
 @Getter
 @Setter
-@NoArgsConstructor
 public class RecordDto {
     private String sessionId;
     private Date fullDate;

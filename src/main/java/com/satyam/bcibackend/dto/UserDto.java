@@ -29,7 +29,33 @@ public class UserDto {
     private int score;
     private List<LikeDto> likes;
     private List<MostOpenedDto> mostOpened;
-    private List<SessionTimeDto> eachSessionTime;
+    private List<SessionDto> sessions;
+    private String phoneNumber;
+
+
+    public UserDto() {
+    }
+
+    public UserDto(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public UserDto(String name, int age, String gender, int brainAge, int score, String phoneNumber) {
+        this.name = name;
+        this.age = age;
+        this.gender = gender;
+        this.brainAge = brainAge;
+        this.score = score;
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
 
     public String getId() {
         return id;
@@ -119,12 +145,12 @@ public class UserDto {
         this.mostOpened = mostOpened;
     }
 
-    public List<SessionTimeDto> getEachSessionTime() {
-        return eachSessionTime;
+    public List<SessionDto> getSessions() {
+        return sessions;
     }
 
-    public void setEachSessionTime(List<SessionTimeDto> eachSessionTime) {
-        this.eachSessionTime = eachSessionTime;
+    public void setSessions(List<SessionDto> sessions) {
+        this.sessions = sessions;
     }
 }
 
