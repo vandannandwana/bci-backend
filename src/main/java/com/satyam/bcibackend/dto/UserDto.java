@@ -14,7 +14,6 @@ import java.time.LocalDate;
 @Document
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
 public class UserDto {
     @Id

@@ -28,6 +28,15 @@ public class AuthServiceImpl implements AuthService {
     public void generateOtp(String phoneNumber) {
         Random random = new Random();
         String otp = String.valueOf(random.nextInt(9000) + 1000);
+
+        TemporaryUser temp = tempUserRepo.findByPhoneNumber(phoneNumber);
+
+        if(temp != null){
+            temp.setOtp(otp);
+            tempUserRepo.save(temp);
+            return;
+        }
+
         tempUserRepo.save(new TemporaryUser(phoneNumber,otp));
         System.out.println("OTP generated: " + otp + " for mobile " + phoneNumber);
         vonageService.sendMessage("Your OTP for CerboTech-BCI Application is : "+otp);
