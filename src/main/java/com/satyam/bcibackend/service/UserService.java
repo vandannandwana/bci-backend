@@ -51,6 +51,16 @@ public class UserService {
 
     }
 
+    public UserDto findUserByPhoneNumber(String phoneNumber){
+        try{
+            return userRepo.findUserByPhoneNumber(phoneNumber);
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+            return new UserDto();
+        }
+
+    }
+
     public UserDto findUserById(String id){
 
         return userRepo.findById(id).get() != null ?userRepo.findById(id).get():null;
