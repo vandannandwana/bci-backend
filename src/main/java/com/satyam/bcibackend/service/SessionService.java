@@ -21,6 +21,35 @@ public class SessionService {
             UserDto user = optionalUser.get();
             List<SessionDto> sessions = user.getSessions();
 
+
+            if(sessions == null){
+
+                List<SessionDto> newsessions = new ArrayList<>();
+
+                SessionDto newSession = new SessionDto();
+                newSession.setId(request.getSessionId());
+                newSession.setSessionName(request.getSessionName());
+                newSession.setAverageTime(request.getTime());
+                newSession.setLowestTime(request.getTime());
+                newSession.setHighestTime(request.getTime());
+                newSession.setSessionTime(request.getSessionTime());
+                long currentSum = 0;
+
+                for (int val :request.getValues()){
+                    currentSum += val;
+                }
+
+                currentSum /= request.getValues().size();
+
+                newsessions.add(newSession);
+                user.setSessions(newsessions);
+                userRepo.save(user);
+                return true;
+
+            }
+
+
+
             for(SessionDto session :sessions){
 
                 if(Objects.equals(session.getId(), request.getSessionId())){
@@ -52,7 +81,7 @@ public class SessionService {
             }
 
             SessionDto newSession = new SessionDto();
-
+            newSession.setId(request.getSessionId());
             newSession.setSessionName(request.getSessionName());
             newSession.setAverageTime(request.getTime());
             newSession.setLowestTime(request.getTime());
