@@ -38,9 +38,9 @@ public class SessionService {
                 for (int val :request.getValues()){
                     currentSum += val;
                 }
-
                 currentSum /= request.getValues().size();
 
+                newSession.setAverageConcentration(currentSum);
                 newsessions.add(newSession);
                 user.setSessions(newsessions);
                 userRepo.save(user);
@@ -71,7 +71,12 @@ public class SessionService {
 
                     currentSum /= request.getValues().size();
 
-                    session.setAverageConcentration((session.getAverageConcentration()+currentSum)/2);
+                    if(session.getAverageConcentration() != null){
+                        session.setAverageConcentration((session.getAverageConcentration()+currentSum)/2);
+                    }else{
+                        session.setAverageConcentration(currentSum);
+                    }
+
 
                     userRepo.save(user);
                     return true;
