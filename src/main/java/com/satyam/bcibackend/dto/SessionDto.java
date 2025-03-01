@@ -1,46 +1,24 @@
 package com.satyam.bcibackend.dto;
 
-import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.MongoId;
 
 @Document
 public class SessionDto {
-    @Id
-    String id;
-    String sessionName;
-    Long sessionTime;
-    Long averageTime;
-    Long lowestTime;
-    Long highestTime;
-    Long averageConcentration;
 
-    public Long getAverageConcentration() {
-        return averageConcentration;
+    @MongoId
+    private String sessionId;
+    private String sessionName;
+    private Long actualDuration;
+    private String filePath;
+
+
+    public String getSessionId() {
+        return sessionId;
     }
 
-    public void setAverageConcentration(Long averageConcentration) {
-        this.averageConcentration = averageConcentration;
-    }
-
-    public SessionDto() {}
-
-    public SessionDto(String id, String sessionName, Long sessionTime, Long averageTime, Long lowestTime, Long highestTime,Long averageConcentration) {
-        this.id = id;
-        this.sessionName = sessionName;
-        this.sessionTime = sessionTime;
-        this.averageTime = averageTime;
-        this.lowestTime = lowestTime;
-        this.highestTime = highestTime;
-        this.averageConcentration = averageConcentration;
-    }
-
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
+    public void setSessionId(String sessionId) {
+        this.sessionId = sessionId;
     }
 
     public String getSessionName() {
@@ -51,35 +29,19 @@ public class SessionDto {
         this.sessionName = sessionName;
     }
 
-    public Long getSessionTime() {
-        return sessionTime;
+    public Long getActualDuration() {
+        return actualDuration;
     }
 
-    public void setSessionTime(Long sessionTime) {
-        this.sessionTime = sessionTime;
+    public void setActualDuration(Long actualDuration) {
+        this.actualDuration = actualDuration;
     }
 
-    public Long getAverageTime() {
-        return averageTime;
+    public String getFilePath() {
+        return filePath;
     }
 
-    public void setAverageTime(Long averageTime) {
-        this.averageTime = averageTime;
-    }
-
-    public Long getLowestTime() {
-        return lowestTime;
-    }
-
-    public void setLowestTime(Long lowestTime) {
-        this.lowestTime = lowestTime;
-    }
-
-    public Long getHighestTime() {
-        return highestTime;
-    }
-
-    public void setHighestTime(Long highestTime) {
-        this.highestTime = highestTime;
+    public void setFilePath(String filePath) {
+        this.filePath = filePath;
     }
 }

@@ -4,33 +4,24 @@ package com.satyam.bcibackend.dto;
 import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.MongoId;
 
 import java.util.List;
 import java.time.LocalDate;
 
 @Document
-@Getter
-@Setter
-@AllArgsConstructor
 public class UserDto {
-    @Id
+    @MongoId
     private String id;
     private String name;
     private int age;
     private String gender;
     private int brainAge;
-    private List<RecordDto> records;
-    private boolean isPremiumUser;
-    private LocalDate premiumExpireDate;
     private int score;
-    private List<LikeDto> likes;
-    private List<MostOpenedDto> mostOpened;
-    private List<SessionDto> sessions;
+    private List<UserSessionDto> sessions;
     private String phoneNumber;
-
 
     public UserDto() {
     }
@@ -39,20 +30,14 @@ public class UserDto {
         this.phoneNumber = phoneNumber;
     }
 
-    public UserDto(String name, int age, String gender, int brainAge, int score, String phoneNumber) {
+    public UserDto(String id, String name, int age, String gender, int brainAge, int score, List<UserSessionDto> sessions, String phoneNumber) {
+        this.id = id;
         this.name = name;
         this.age = age;
         this.gender = gender;
         this.brainAge = brainAge;
         this.score = score;
-        this.phoneNumber = phoneNumber;
-    }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
+        this.sessions = sessions;
         this.phoneNumber = phoneNumber;
     }
 
@@ -96,30 +81,6 @@ public class UserDto {
         this.brainAge = brainAge;
     }
 
-    public List<RecordDto> getRecords() {
-        return records;
-    }
-
-    public void setRecords(List<RecordDto> records) {
-        this.records = records;
-    }
-
-    public boolean isPremiumUser() {
-        return isPremiumUser;
-    }
-
-    public void setPremiumUser(boolean premiumUser) {
-        isPremiumUser = premiumUser;
-    }
-
-    public LocalDate getPremiumExpireDate() {
-        return premiumExpireDate;
-    }
-
-    public void setPremiumExpireDate(LocalDate premiumExpireDate) {
-        this.premiumExpireDate = premiumExpireDate;
-    }
-
     public int getScore() {
         return score;
     }
@@ -128,28 +89,20 @@ public class UserDto {
         this.score = score;
     }
 
-    public List<LikeDto> getLikes() {
-        return likes;
-    }
-
-    public void setLikes(List<LikeDto> likes) {
-        this.likes = likes;
-    }
-
-    public List<MostOpenedDto> getMostOpened() {
-        return mostOpened;
-    }
-
-    public void setMostOpened(List<MostOpenedDto> mostOpened) {
-        this.mostOpened = mostOpened;
-    }
-
-    public List<SessionDto> getSessions() {
+    public List<UserSessionDto> getSessions() {
         return sessions;
     }
 
-    public void setSessions(List<SessionDto> sessions) {
+    public void setSessions(List<UserSessionDto> sessions) {
         this.sessions = sessions;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 }
 

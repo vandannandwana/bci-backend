@@ -1,7 +1,4 @@
 package com.satyam.bcibackend.service;
-
-import com.satyam.bcibackend.dto.RecordDto;
-import com.satyam.bcibackend.dto.SessionUpdateRequest;
 import com.satyam.bcibackend.dto.UserDto;
 import com.satyam.bcibackend.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;

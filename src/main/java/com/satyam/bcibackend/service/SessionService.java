@@ -1,115 +1,61 @@
 package com.satyam.bcibackend.service;
 
-import com.satyam.bcibackend.dto.RecordDto;
 import com.satyam.bcibackend.dto.SessionDto;
-import com.satyam.bcibackend.dto.SessionUpdateRequest;
-import com.satyam.bcibackend.dto.UserDto;
-import com.satyam.bcibackend.repositories.UserRepository;
+import com.satyam.bcibackend.repositories.SessionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class SessionService {
+
     @Autowired
-    UserRepository userRepo;
-    public boolean updateSession(SessionUpdateRequest request) {
-        Optional<UserDto> optionalUser = userRepo.findById(request.getUserId());
-
-        if(optionalUser.isPresent()){
-            UserDto user = optionalUser.get();
-            List<SessionDto> sessions = user.getSessions();
+    SessionRepository sessionRepo;
 
 
-            if(sessions == null){
+    public List<SessionDto> getAllSessions() {
 
-                List<SessionDto> newsessions = new ArrayList<>();
+        return sessionRepo.findAll();
 
-                SessionDto newSession = new SessionDto();
-                newSession.setId(request.getSessionId());
-                newSession.setSessionName(request.getSessionName());
-                newSession.setAverageTime(request.getTime());
-                newSession.setLowestTime(request.getTime());
-                newSession.setHighestTime(request.getTime());
-                newSession.setSessionTime(request.getSessionTime());
-                long currentSum = 0;
+    }
 
-                for (int val :request.getValues()){
-                    currentSum += val;
-                }
-                currentSum /= request.getValues().size();
+    public List<SessionDto> getSessionByName(String name) {
 
-                newSession.setAverageConcentration(currentSum);
-                newsessions.add(newSession);
-                user.setSessions(newsessions);
-                userRepo.save(user);
-                return true;
+        return sessionRepo.findByName(name);
 
-            }
+    }
+
+    public SessionDto getSessionById(String id){
+
+        Optional<SessionDto> optionalSession  =sessionRepo.findById(id);
+
+        return optionalSession.orElse(null);
 
 
+    }
 
-            for(SessionDto session :sessions){
+    public boolean addSession(SessionDto session) {
 
-                if(Objects.equals(session.getId(), request.getSessionId())){
-
-                    if(request.getTime() > session.getHighestTime()){
-                        session.setHighestTime(request.getTime());
-                    }
-
-                    if(request.getTime() < session.getLowestTime()){
-                        session.setLowestTime(request.getTime());
-                    }
-
-                    session.setAverageTime((session.getAverageTime()+ request.getTime())/2);
-                    long currentSum = 0;
-
-                    for (int val :request.getValues()){
-                        currentSum += val;
-                    }
-
-                    currentSum /= request.getValues().size();
-
-                    if(session.getAverageConcentration() != null){
-                        session.setAverageConcentration((session.getAverageConcentration()+currentSum)/2);
-                    }else{
-                        session.setAverageConcentration(currentSum);
-                    }
-
-
-                    userRepo.save(user);
-                    return true;
-                }
-
-
-            }
-
-            SessionDto newSession = new SessionDto();
-            newSession.setId(request.getSessionId());
-            newSession.setSessionName(request.getSessionName());
-            newSession.setAverageTime(request.getTime());
-            newSession.setLowestTime(request.getTime());
-            newSession.setHighestTime(request.getTime());
-            newSession.setSessionTime(request.getSessionTime());
-            long currentSum = 0;
-
-            for (int val :request.getValues()){
-                currentSum += val;
-            }
-
-            currentSum /= request.getValues().size();
-            newSession.setAverageConcentration(currentSum);
-            user.getSessions().add(newSession);
-            userRepo.save(user);
-
+        try {
+            sessionRepo.save(session);
             return true;
+        }catch (Exception e) {
+            return false;
+        }
+    }
 
+
+    public boolean addSessions(List<SessionDto> sessions) {
+
+        try {
+            sessionRepo.saveAll(sessions);
+            return true;
+        }catch (Exception e){
+            return false;
         }
 
 
-
-        return false;
     }
-
 }

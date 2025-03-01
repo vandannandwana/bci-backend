@@ -1,5 +1,0 @@
-# Created at 2025-02-28T14:46:25.547
-Boot Manifest-JAR contains absolute paths in classpath 'D:\Cerbo\bci-backend\bci-backend\target\test-classes'
-Hint: <argLine>-Djdk.net.URLClassPath.disableClassPathURLCheck=true</argLine>
-'other' has different root
-
