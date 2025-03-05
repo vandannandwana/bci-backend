@@ -24,11 +24,10 @@ public class UserController {
     @PostMapping("/addUser")
     ResponseEntity<String> addUser(@RequestBody UserDto user){
 
-        try{
-            userService.addUser(user);
+        if(userService.addUser(user)){
             return ResponseEntity.ok("User Added Successfully");
-        }catch (Exception e){
-            return ResponseEntity.ok("Failed to pass your request with the error: "+e.getMessage());
+        }else {
+            return ResponseEntity.ok("User Not Added Successfully");
         }
 
     }

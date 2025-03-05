@@ -14,7 +14,6 @@ com\satyam\bcibackend\service\UserService.class
 com\satyam\bcibackend\controller\UserController.class
 com\satyam\bcibackend\BciBackendApplication.class
 com\satyam\bcibackend\dto\GenerateOtpResponse.class
-com\satyam\bcibackend\service\AuthServiceImpl.class
 com\satyam\bcibackend\dto\RegisterResponse.class
 com\satyam\bcibackend\service\TodoService.class
 com\satyam\bcibackend\repositories\TodoRepository.class

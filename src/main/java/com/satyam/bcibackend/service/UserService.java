@@ -21,15 +21,18 @@ public class UserService {
 
     }
 
-    public void addUser(UserDto user){
+    public boolean addUser(UserDto user){
         try{
             UserDto temp = userRepo.findUserByPhoneNumber(user.getPhoneNumber());
             user.setId(temp.getId());
             userRepo.save(user);
+            return true;
         }catch (Exception e){
             System.out.println(e.getMessage());
+            return false;
         }
     }
+
     public void addUsers(List<UserDto> users){
         try{
             userRepo.saveAll(users);

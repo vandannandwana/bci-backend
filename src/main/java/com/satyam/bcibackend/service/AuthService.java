@@ -1,8 +1,73 @@
 package com.satyam.bcibackend.service;
 
+import com.satyam.bcibackend.dto.GenerateOtpResponse;
 import com.satyam.bcibackend.dto.RegisterRequest;
+import com.satyam.bcibackend.dto.TemporaryUser;
+import com.satyam.bcibackend.dto.UserDto;
+import com.satyam.bcibackend.repositories.TemporaryUserRepository;
+import com.satyam.bcibackend.repositories.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-public interface AuthService {
-    void generateOtp(String phoneNumber);
-    boolean verifyOtp(RegisterRequest registerRequest) throws IllegalAccessException;
+import java.util.Objects;
+import java.util.Random;
+
+@Service
+public class AuthService {
+
+    @Autowired
+    VonageService vonageService;
+
+    @Autowired
+    TemporaryUserRepository tempUserRepo;
+
+    @Autowired
+    UserRepository userRepository;
+
+    public void generateOtp(String phoneNumber) {
+        Random random = new Random();
+        String otp = String.valueOf(random.nextInt(9000) + 1000);
+
+        TemporaryUser temp = tempUserRepo.findByPhoneNumber(phoneNumber);
+
+        if(temp != null){
+            temp.setOtp(otp);
+            tempUserRepo.save(temp);
+            return;
+        }
+
+        tempUserRepo.save(new TemporaryUser(phoneNumber,otp));
+        System.out.println("OTP generated: " + otp + " for mobile " + phoneNumber);
+        vonageService.sendMessage("Your OTP for CerboTech-BCI Application is : "+otp);
+        // Sent OTP to phoneNumber
+        GenerateOtpResponse generateOtpResponse = new GenerateOtpResponse();
+        generateOtpResponse.setMessage("Successfully sent the OTP to registered mobile number");
+    }
+
+    public boolean verifyOtp(RegisterRequest registerRequest){
+        try {
+            TemporaryUser temp = tempUserRepo.findByPhoneNumber(registerRequest.getPhoneNumber());
+            if(temp != null){
+
+                UserDto user  = userRepository.findUserByPhoneNumber(registerRequest.getPhoneNumber());
+
+                if (user != null){
+                    return false;
+                }
+
+                if(Objects.equals(temp.getOtp(), registerRequest.getOtp())){
+
+                    userRepository.save(new UserDto(registerRequest.getPhoneNumber()));
+
+                    return true;
+                }
+
+            }
+
+        }catch (Exception e){
+            return false;
+        }
+        return false;
+
+    }
 }

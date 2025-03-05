@@ -34,7 +34,7 @@ public class AuthController {
         if(authService.verifyOtp(registerRequest)){
             response.setToken("Verification Successful");
         }else {
-            response.setToken("Verification not Successful");
+            response.setToken("Verification not Successful or User Already Exists");
         }
         return ResponseEntity.ok(response);
     }
