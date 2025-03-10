@@ -2,8 +2,6 @@ package com.satyam.bcibackend.dto;
 
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.MongoId;
-import java.time.LocalDate;
-import java.time.LocalTime;
 
 @Document
 public class TodoDto {
@@ -15,7 +13,15 @@ public class TodoDto {
     String date;
     String time;
     String type;// (university, health, music, work, other)
+    Boolean isActive;
 
+    public Boolean getActive() {
+        return isActive;
+    }
+
+    public void setActive(Boolean active) {
+        isActive = active;
+    }
 
     public String getType() {
         return type;

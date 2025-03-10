@@ -1,6 +1,5 @@
 package com.satyam.bcibackend.dto;
 
-import com.satyam.bcibackend.enums.Gender;
 import lombok.*;
 
 import java.util.Date;

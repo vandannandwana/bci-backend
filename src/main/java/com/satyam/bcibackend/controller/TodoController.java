@@ -3,6 +3,7 @@ package com.satyam.bcibackend.controller;
 import com.satyam.bcibackend.dto.TodoDto;
 import com.satyam.bcibackend.service.TodoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -78,6 +79,36 @@ public class TodoController {
 
     }
 
+
+    @GetMapping("/getTodos/{type}")
+    public ResponseEntity<List<TodoDto>> getTodosByType(@PathVariable("type") String type){
+
+        try{
+            List<TodoDto> todos = todoService.getAllTodosByType(type);
+
+            if(!todos.isEmpty()){
+                return ResponseEntity.ok(todos);
+            }else {
+                return ResponseEntity.noContent().build();
+            }
+        }catch (Exception e){
+            return ResponseEntity.noContent().build();
+        }
+
+
+    }
+
+
+    @PostMapping("/changeTodoState")
+    public ResponseEntity<String> changeTodoState(@Param("todoId") String todoId,@Param("isActive") Boolean isActive){
+        try{
+            todoService.changeState(todoId,isActive);
+            return ResponseEntity.ok("State Changed to "+isActive);
+        }catch (Exception e){
+            return ResponseEntity.internalServerError().body("Error Occured"+e.getMessage());
+        }
+
+    }
 
 
 

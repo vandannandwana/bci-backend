@@ -1,6 +1,5 @@
 com\satyam\bcibackend\dto\TodoDto.class
 com\satyam\bcibackend\controller\UserSessionController.class
-com\satyam\bcibackend\enums\Gender.class
 com\satyam\bcibackend\repositories\UserRepository.class
 com\satyam\bcibackend\repositories\SessionRepository.class
 com\satyam\bcibackend\service\VonageService.class

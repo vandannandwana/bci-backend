@@ -14,7 +14,6 @@ D:\Cerbo\bci-backend\bci-backend\src\main\java\com\satyam\bcibackend\dto\TodoDto
 D:\Cerbo\bci-backend\bci-backend\src\main\java\com\satyam\bcibackend\dto\UserDto.java
 D:\Cerbo\bci-backend\bci-backend\src\main\java\com\satyam\bcibackend\dto\UserSessionDto.java
 D:\Cerbo\bci-backend\bci-backend\src\main\java\com\satyam\bcibackend\dto\UserSessionRequestDto.java
-D:\Cerbo\bci-backend\bci-backend\src\main\java\com\satyam\bcibackend\enums\Gender.java
 D:\Cerbo\bci-backend\bci-backend\src\main\java\com\satyam\bcibackend\repositories\SessionRepository.java
 D:\Cerbo\bci-backend\bci-backend\src\main\java\com\satyam\bcibackend\repositories\TemporaryUserRepository.java
 D:\Cerbo\bci-backend\bci-backend\src\main\java\com\satyam\bcibackend\repositories\TodoRepository.java

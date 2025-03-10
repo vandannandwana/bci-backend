@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class TodoService {
@@ -69,5 +70,23 @@ public class TodoService {
     }
 
 
+    public List<TodoDto> getAllTodosByType(String type) {
 
+        return todoRepo.findAllByType(type);
+
+    }
+
+    public void changeState(String todoId, Boolean isActive) throws Exception {
+        Optional<TodoDto> temp = todoRepo.findById(todoId);
+
+        if (temp.isEmpty()){
+            throw new Exception("No Todo Found");
+        }
+
+        TodoDto todo = temp.get();
+        todo.setActive(isActive);
+        todoRepo.save(todo);
+
+
+    }
 }
